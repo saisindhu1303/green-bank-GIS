@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2102323809e121d9b8738fdd82980c84 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<style>
+  #sidebar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 300px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    padding: 10px;
+    border: 2px solid gray;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 9999;
+  }
+  #sidebar h2 {
+    margin-top: 0;
+  }
+  #sidebar ul {
+    list-style: none;
+    padding-left: 5px;
+  }
+  #sidebar li {
+    cursor: pointer;
+    margin: 7px 0;
+    color: darkgreen;
+  }
+  #sidebar li:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div id="sidebar">
+  <h2>Green Innovation Banks</h2>
+  <ul>
+    
+      <li onclick="zoomToMarker(0)"><strong>Connecticut Green Bank</strong> — 700 Canal St Ste 5, Stamford, CT 06902</li>
+    
+      <li onclick="zoomToMarker(1)"><strong>New York Green Bank</strong> — 1359 Broadway, 19th Floor, New York, NY 10018</li>
+    
+      <li onclick="zoomToMarker(2)"><strong>California IBank – CLEEN Center</strong> — 1325 J St, Suite 1300, Sacramento, CA 95814</li>
+    
+      <li onclick="zoomToMarker(3)"><strong>Hawaii Green Infrastructure Authority</strong> — 250 S Hotel St #501, Honolulu, HI 96813</li>
+    
+      <li onclick="zoomToMarker(4)"><strong>DC Green Bank</strong> — 1140 19th St NW, Ste 800, Washington, DC 20036</li>
+    
+      <li onclick="zoomToMarker(5)"><strong>Rhode Island Infrastructure Bank</strong> — 235 Promenade St, Suite 119, Providence, RI 02908</li>
+    
+      <li onclick="zoomToMarker(6)"><strong>Montgomery County Green Bank</strong> — 850 Hungerford Dr, Ste 210, Rockville, MD 20850</li>
+    
+      <li onclick="zoomToMarker(7)"><strong>Michigan Saves</strong> — 110 W Michigan Ave, Ste 100B, Lansing, MI 48933</li>
+    
+      <li onclick="zoomToMarker(8)"><strong>Colorado Clean Energy Fund</strong> — 2280 W Alameda Ave #202, Denver, CO 80223</li>
+    
+      <li onclick="zoomToMarker(9)"><strong>Nevada Clean Energy Fund</strong> — 3300 W Sahara Ave #425, Las Vegas, NV 89102</li>
+    
+      <li onclick="zoomToMarker(10)"><strong>Delaware SEU (Energize Delaware)</strong> — 500 W Loockerman St, Ste 400, Dover, DE 19904</li>
+    
+      <li onclick="zoomToMarker(11)"><strong>Illinois Climate Bank (IFA)</strong> — 160 N LaSalle St, Ste C-800, Chicago, IL 60601</li>
+    
+      <li onclick="zoomToMarker(12)"><strong>New Mexico CERG</strong> — 1220 S Saint Francis Dr, Santa Fe, NM 87505</li>
+    
+      <li onclick="zoomToMarker(13)"><strong>Minnesota CIFA</strong> — 85 7th Place East, Suite 280, St. Paul, MN 55101</li>
+    
+      <li onclick="zoomToMarker(14)"><strong>North Carolina Clean Energy Fund</strong> — 2337 Garner Rd Ste 205, Raleigh, NC 27610</li>
+    
+      <li onclick="zoomToMarker(15)"><strong>Solar Energy Loan Fund (SELF)</strong> — 531 NW Lake Whitney Pl, Ste 105, Port St. Lucie, FL 34986</li>
+    
+      <li onclick="zoomToMarker(16)"><strong>Winneshiek Energy District</strong> — 217 W Water St, Decorah, IA 52101</li>
+    
+      <li onclick="zoomToMarker(17)"><strong>Inclusive Prosperity Capital</strong> — 75 Charter Oak Ave, Suite 1-130, Hartford, CT 06106</li>
+    
+      <li onclick="zoomToMarker(18)"><strong>Green Bank Texas</strong> — 816 Congress Ave, Ste 970, Austin, TX 78701</li>
+    
+      <li onclick="zoomToMarker(19)"><strong>New Jersey Green Fund (proposed)</strong> — 36 W State St, Trenton, NJ 08608</li>
+    
+  </ul>
+</div>
+
+<script>
+  window.addEventListener('load', function() {
+    var map = window.map_2102323809e121d9b8738fdd82980c84 || map_2102323809e121d9b8738fdd82980c84;
+    var bankMarkers = [];
+
+    // Find the MarkerClusterGroup layer on the map
+    var markerClusterGroup = null;
+    map.eachLayer(function(layer){
+      if(layer instanceof L.MarkerClusterGroup){
+        markerClusterGroup = layer;
+      }
+    });
+
+    if(markerClusterGroup === null){
+      console.error("MarkerClusterGroup not found!");
+      return;
+    }
+
+    // Get all markers inside the cluster group
+    bankMarkers = [];
+    markerClusterGroup.eachLayer(function(layer){
+      if(layer instanceof L.Marker){
+        bankMarkers.push(layer);
+      }
+    });
+
+    console.log("Collected markers from cluster group:", bankMarkers.length);
+
+    window.zoomToMarker = function(idx){
+      if(bankMarkers.length === 0){
+        alert("Markers not loaded yet, please wait a moment and try again.");
+        return;
+      }
+      var marker = bankMarkers[idx];
+      if(marker){
+        map.setView(marker.getLatLng(), 13);
+        marker.openPopup();
+      }
+    }
+  });
+</script>
+    
+            <div class="folium-map" id="map_2102323809e121d9b8738fdd82980c84" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2102323809e121d9b8738fdd82980c84 = L.map(
+                "map_2102323809e121d9b8738fdd82980c84",
+                {
+                    center: [39.8283, -98.5795],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_66d5c7d98de417463b0e85dd8adcc2a9 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_66d5c7d98de417463b0e85dd8adcc2a9.addTo(map_2102323809e121d9b8738fdd82980c84);
+        
+    
+            var marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_1f5b2afa2a835710c86ffcbd3fa621e0 = L.marker(
+                [41.0471, -73.5338],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_290c7578def0817be8e1b096d4987bc9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c51413767afd8c9a8cd5ed2498b267cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_babb15d613913b48c2d12a8597b2a069 = $(`<div id="html_babb15d613913b48c2d12a8597b2a069" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Connecticut Green Bank</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Solar, efficiency, C&I, residential<br>        <b>Address:</b> 700 Canal St Ste 5, Stamford, CT 06902<br>        <b>Contact:</b> <a href=\"https://www.ctgreenbank.com\" target=\"_blank\">https://www.ctgreenbank.com</a>    </div></div>`)[0];
+                popup_c51413767afd8c9a8cd5ed2498b267cc.setContent(html_babb15d613913b48c2d12a8597b2a069);
+            
+        
+
+        marker_1f5b2afa2a835710c86ffcbd3fa621e0.bindPopup(popup_c51413767afd8c9a8cd5ed2498b267cc)
+        ;
+
+        
+    
+    
+            marker_1f5b2afa2a835710c86ffcbd3fa621e0.bindTooltip(
+                `<div>
+                     Connecticut Green Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1f5b2afa2a835710c86ffcbd3fa621e0.setIcon(icon_290c7578def0817be8e1b096d4987bc9);
+            
+    
+            var marker_850f9299790953d035d85b455f695ca5 = L.marker(
+                [40.7547, -73.9873],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_91e288a8680d36a3eb1c1038e3958800 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cbadb4e6402d1b7021005d92c2d0c1f1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9316f0893ea62a51ae506bb3e8f124fc = $(`<div id="html_9316f0893ea62a51ae506bb3e8f124fc" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>New York Green Bank</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Large-scale clean energy finance<br>        <b>Address:</b> 1359 Broadway, 19th Floor, New York, NY 10018<br>        <b>Contact:</b> <a href=\"https://greenbank.ny.gov\" target=\"_blank\">https://greenbank.ny.gov</a>    </div></div>`)[0];
+                popup_cbadb4e6402d1b7021005d92c2d0c1f1.setContent(html_9316f0893ea62a51ae506bb3e8f124fc);
+            
+        
+
+        marker_850f9299790953d035d85b455f695ca5.bindPopup(popup_cbadb4e6402d1b7021005d92c2d0c1f1)
+        ;
+
+        
+    
+    
+            marker_850f9299790953d035d85b455f695ca5.bindTooltip(
+                `<div>
+                     New York Green Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_850f9299790953d035d85b455f695ca5.setIcon(icon_91e288a8680d36a3eb1c1038e3958800);
+            
+    
+            var marker_68da01f4b15739294017ce332dc7e2d2 = L.marker(
+                [38.5816, -121.4944],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_612c1615f888e7525b03322dc13469b4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_48947bacd4ba2425be2dd0a07749bf21 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0acf6fcd25176f61268d5433b991a5be = $(`<div id="html_0acf6fcd25176f61268d5433b991a5be" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>California IBank – CLEEN Center</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Infrastructure, water, energy<br>        <b>Address:</b> 1325 J St, Suite 1300, Sacramento, CA 95814<br>        <b>Contact:</b> <a href=\"https://ibank.ca.gov/clean-energy-financing/\" target=\"_blank\">https://ibank.ca.gov/clean-energy-financing/</a>    </div></div>`)[0];
+                popup_48947bacd4ba2425be2dd0a07749bf21.setContent(html_0acf6fcd25176f61268d5433b991a5be);
+            
+        
+
+        marker_68da01f4b15739294017ce332dc7e2d2.bindPopup(popup_48947bacd4ba2425be2dd0a07749bf21)
+        ;
+
+        
+    
+    
+            marker_68da01f4b15739294017ce332dc7e2d2.bindTooltip(
+                `<div>
+                     California IBank – CLEEN Center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_68da01f4b15739294017ce332dc7e2d2.setIcon(icon_612c1615f888e7525b03322dc13469b4);
+            
+    
+            var marker_6cade85e07585982d20dbcc908f7c88d = L.marker(
+                [21.3069, -157.8583],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_48645ab13e47a48071f5166ef233c543 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4db3be41d84938d30e89a1b0816da070 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_919e9369967c7d073f16724f3febae93 = $(`<div id="html_919e9369967c7d073f16724f3febae93" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Hawaii Green Infrastructure Authority</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Low-income solar access<br>        <b>Address:</b> 250 S Hotel St #501, Honolulu, HI 96813<br>        <b>Contact:</b> <a href=\"https://gems.hawaii.gov\" target=\"_blank\">https://gems.hawaii.gov</a>    </div></div>`)[0];
+                popup_4db3be41d84938d30e89a1b0816da070.setContent(html_919e9369967c7d073f16724f3febae93);
+            
+        
+
+        marker_6cade85e07585982d20dbcc908f7c88d.bindPopup(popup_4db3be41d84938d30e89a1b0816da070)
+        ;
+
+        
+    
+    
+            marker_6cade85e07585982d20dbcc908f7c88d.bindTooltip(
+                `<div>
+                     Hawaii Green Infrastructure Authority
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6cade85e07585982d20dbcc908f7c88d.setIcon(icon_48645ab13e47a48071f5166ef233c543);
+            
+    
+            var marker_85df16ea027adbadeb9ed2b7c9de841b = L.marker(
+                [38.9038, -77.0431],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_483304b40180daadd578c6a78269a927 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_511535de8ac918e4173e9141ecaba01c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_603faa00aaae62932b880b78ef4ba476 = $(`<div id="html_603faa00aaae62932b880b78ef4ba476" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>DC Green Bank</strong><br>        <b>Type:</b> Local (City)<br>        <b>Focus:</b> Building retrofits, solar, equity<br>        <b>Address:</b> 1140 19th St NW, Ste 800, Washington, DC 20036<br>        <b>Contact:</b> <a href=\"https://dcgreenbank.com\" target=\"_blank\">https://dcgreenbank.com</a>    </div></div>`)[0];
+                popup_511535de8ac918e4173e9141ecaba01c.setContent(html_603faa00aaae62932b880b78ef4ba476);
+            
+        
+
+        marker_85df16ea027adbadeb9ed2b7c9de841b.bindPopup(popup_511535de8ac918e4173e9141ecaba01c)
+        ;
+
+        
+    
+    
+            marker_85df16ea027adbadeb9ed2b7c9de841b.bindTooltip(
+                `<div>
+                     DC Green Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_85df16ea027adbadeb9ed2b7c9de841b.setIcon(icon_483304b40180daadd578c6a78269a927);
+            
+    
+            var marker_238447be67847a28a96eed92ea68f47f = L.marker(
+                [41.8236, -71.4128],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_0216bac267e76cb926454ad6bbdc21e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_894f683d07fc4c2e84619418b29901f0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6c0540704c2c117a28c726b466272e40 = $(`<div id="html_6c0540704c2c117a28c726b466272e40" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Rhode Island Infrastructure Bank</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Water, clean energy, municipalities<br>        <b>Address:</b> 235 Promenade St, Suite 119, Providence, RI 02908<br>        <b>Contact:</b> <a href=\"https://www.riib.org\" target=\"_blank\">https://www.riib.org</a>    </div></div>`)[0];
+                popup_894f683d07fc4c2e84619418b29901f0.setContent(html_6c0540704c2c117a28c726b466272e40);
+            
+        
+
+        marker_238447be67847a28a96eed92ea68f47f.bindPopup(popup_894f683d07fc4c2e84619418b29901f0)
+        ;
+
+        
+    
+    
+            marker_238447be67847a28a96eed92ea68f47f.bindTooltip(
+                `<div>
+                     Rhode Island Infrastructure Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_238447be67847a28a96eed92ea68f47f.setIcon(icon_0216bac267e76cb926454ad6bbdc21e8);
+            
+    
+            var marker_77fac695b5dd301ffd2f6a75c8eb1642 = L.marker(
+                [39.0839, -77.1528],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_0530c550961fa7b04e9684f91495c401 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ec380e95bb8b6c69c0675250f627df09 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a3c10b66ab26f0e4f87bc5f206e2a469 = $(`<div id="html_a3c10b66ab26f0e4f87bc5f206e2a469" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Montgomery County Green Bank</strong><br>        <b>Type:</b> Local (County)<br>        <b>Focus:</b> Energy efficiency, homes, buildings<br>        <b>Address:</b> 850 Hungerford Dr, Ste 210, Rockville, MD 20850<br>        <b>Contact:</b> <a href=\"https://mcgreenbank.org\" target=\"_blank\">https://mcgreenbank.org</a>    </div></div>`)[0];
+                popup_ec380e95bb8b6c69c0675250f627df09.setContent(html_a3c10b66ab26f0e4f87bc5f206e2a469);
+            
+        
+
+        marker_77fac695b5dd301ffd2f6a75c8eb1642.bindPopup(popup_ec380e95bb8b6c69c0675250f627df09)
+        ;
+
+        
+    
+    
+            marker_77fac695b5dd301ffd2f6a75c8eb1642.bindTooltip(
+                `<div>
+                     Montgomery County Green Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_77fac695b5dd301ffd2f6a75c8eb1642.setIcon(icon_0530c550961fa7b04e9684f91495c401);
+            
+    
+            var marker_80b5af2f0e13ae6f177fd5e0a6891dd1 = L.marker(
+                [42.7336, -84.5555],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_156cdb959ef738d66f1ccdccd6c0e7e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e56d35999d9888e55bbf012981a03984 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6e086df73782d22b1ea0ec64247ecfc9 = $(`<div id="html_6e086df73782d22b1ea0ec64247ecfc9" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Michigan Saves</strong><br>        <b>Type:</b> Nonprofit<br>        <b>Focus:</b> Clean energy loans (all sectors)<br>        <b>Address:</b> 110 W Michigan Ave, Ste 100B, Lansing, MI 48933<br>        <b>Contact:</b> <a href=\"https://michigansaves.org\" target=\"_blank\">https://michigansaves.org</a>    </div></div>`)[0];
+                popup_e56d35999d9888e55bbf012981a03984.setContent(html_6e086df73782d22b1ea0ec64247ecfc9);
+            
+        
+
+        marker_80b5af2f0e13ae6f177fd5e0a6891dd1.bindPopup(popup_e56d35999d9888e55bbf012981a03984)
+        ;
+
+        
+    
+    
+            marker_80b5af2f0e13ae6f177fd5e0a6891dd1.bindTooltip(
+                `<div>
+                     Michigan Saves
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_80b5af2f0e13ae6f177fd5e0a6891dd1.setIcon(icon_156cdb959ef738d66f1ccdccd6c0e7e9);
+            
+    
+            var marker_e1d88f34c2abb5a92fa4f477b3cb9411 = L.marker(
+                [39.7063, -105.0128],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_255cfbcd655a59b8970ee3fb190ad981 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d3ce42bac783e864395bdff6b325a56e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_057ba0ea33e3c1cf00b09aa51849ca3f = $(`<div id="html_057ba0ea33e3c1cf00b09aa51849ca3f" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Colorado Clean Energy Fund</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Community solar, efficiency<br>        <b>Address:</b> 2280 W Alameda Ave #202, Denver, CO 80223<br>        <b>Contact:</b> <a href=\"https://cocleanenergyfund.com\" target=\"_blank\">https://cocleanenergyfund.com</a>    </div></div>`)[0];
+                popup_d3ce42bac783e864395bdff6b325a56e.setContent(html_057ba0ea33e3c1cf00b09aa51849ca3f);
+            
+        
+
+        marker_e1d88f34c2abb5a92fa4f477b3cb9411.bindPopup(popup_d3ce42bac783e864395bdff6b325a56e)
+        ;
+
+        
+    
+    
+            marker_e1d88f34c2abb5a92fa4f477b3cb9411.bindTooltip(
+                `<div>
+                     Colorado Clean Energy Fund
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e1d88f34c2abb5a92fa4f477b3cb9411.setIcon(icon_255cfbcd655a59b8970ee3fb190ad981);
+            
+    
+            var marker_9f48eedf1131768e0120ecf15e52811b = L.marker(
+                [36.1391, -115.2241],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_e3c361c056318d30cc6c87786a458919 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0c01193b9c1eef3430538e00d6593874 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_53eb460a370c0b3f906776f95866de4a = $(`<div id="html_53eb460a370c0b3f906776f95866de4a" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Nevada Clean Energy Fund</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Residential & commercial solar<br>        <b>Address:</b> 3300 W Sahara Ave #425, Las Vegas, NV 89102<br>        <b>Contact:</b> <a href=\"https://cleanenergyfundnv.com\" target=\"_blank\">https://cleanenergyfundnv.com</a>    </div></div>`)[0];
+                popup_0c01193b9c1eef3430538e00d6593874.setContent(html_53eb460a370c0b3f906776f95866de4a);
+            
+        
+
+        marker_9f48eedf1131768e0120ecf15e52811b.bindPopup(popup_0c01193b9c1eef3430538e00d6593874)
+        ;
+
+        
+    
+    
+            marker_9f48eedf1131768e0120ecf15e52811b.bindTooltip(
+                `<div>
+                     Nevada Clean Energy Fund
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9f48eedf1131768e0120ecf15e52811b.setIcon(icon_e3c361c056318d30cc6c87786a458919);
+            
+    
+            var marker_c1af653e11c1481810ea51574392b04c = L.marker(
+                [39.1582, -75.5244],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_fa5a9ae4815247c83c40d5e99be34a6d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9fa2698367f01cdfeff7a8fcc888071c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4fffe3186ecdfd654eef2732e3fbf58e = $(`<div id="html_4fffe3186ecdfd654eef2732e3fbf58e" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Delaware SEU (Energize Delaware)</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Energy audits, loans, weatherization<br>        <b>Address:</b> 500 W Loockerman St, Ste 400, Dover, DE 19904<br>        <b>Contact:</b> <a href=\"https://www.energizedelaware.org\" target=\"_blank\">https://www.energizedelaware.org</a>    </div></div>`)[0];
+                popup_9fa2698367f01cdfeff7a8fcc888071c.setContent(html_4fffe3186ecdfd654eef2732e3fbf58e);
+            
+        
+
+        marker_c1af653e11c1481810ea51574392b04c.bindPopup(popup_9fa2698367f01cdfeff7a8fcc888071c)
+        ;
+
+        
+    
+    
+            marker_c1af653e11c1481810ea51574392b04c.bindTooltip(
+                `<div>
+                     Delaware SEU (Energize Delaware)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c1af653e11c1481810ea51574392b04c.setIcon(icon_fa5a9ae4815247c83c40d5e99be34a6d);
+            
+    
+            var marker_37a98f6488b0c7ba21a2d82e892d6dbe = L.marker(
+                [41.8837, -87.6315],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_55c693a76e47b713a15e40e526ef6af7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bdf346b7b1ebcf2dfbdbbc7b2fefd23b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ca14e604a657a3f0e1e2b2a8b713b3b2 = $(`<div id="html_ca14e604a657a3f0e1e2b2a8b713b3b2" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Illinois Climate Bank (IFA)</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Clean infrastructure, grid resilience<br>        <b>Address:</b> 160 N LaSalle St, Ste C-800, Chicago, IL 60601<br>        <b>Contact:</b> <a href=\"https://il-fa.com/programs/climate-bank\" target=\"_blank\">https://il-fa.com/programs/climate-bank</a>    </div></div>`)[0];
+                popup_bdf346b7b1ebcf2dfbdbbc7b2fefd23b.setContent(html_ca14e604a657a3f0e1e2b2a8b713b3b2);
+            
+        
+
+        marker_37a98f6488b0c7ba21a2d82e892d6dbe.bindPopup(popup_bdf346b7b1ebcf2dfbdbbc7b2fefd23b)
+        ;
+
+        
+    
+    
+            marker_37a98f6488b0c7ba21a2d82e892d6dbe.bindTooltip(
+                `<div>
+                     Illinois Climate Bank (IFA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_37a98f6488b0c7ba21a2d82e892d6dbe.setIcon(icon_55c693a76e47b713a15e40e526ef6af7);
+            
+    
+            var marker_afd915fa91c3c1c4ee7dbb2b5ad147dd = L.marker(
+                [35.687, -105.9378],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_d507493ddb1b3efada78472851c144c8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_479ec20758455e5aa395e6a13fdaa23c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_21d8a8edd09ca761d674a7543770de6f = $(`<div id="html_21d8a8edd09ca761d674a7543770de6f" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>New Mexico CERG</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Grid resilience, solar + storage<br>        <b>Address:</b> 1220 S Saint Francis Dr, Santa Fe, NM 87505<br>        <b>Contact:</b> <a href=\"https://nmfinance.com (parent agency: NMFA)\" target=\"_blank\">https://nmfinance.com (parent agency: NMFA)</a>    </div></div>`)[0];
+                popup_479ec20758455e5aa395e6a13fdaa23c.setContent(html_21d8a8edd09ca761d674a7543770de6f);
+            
+        
+
+        marker_afd915fa91c3c1c4ee7dbb2b5ad147dd.bindPopup(popup_479ec20758455e5aa395e6a13fdaa23c)
+        ;
+
+        
+    
+    
+            marker_afd915fa91c3c1c4ee7dbb2b5ad147dd.bindTooltip(
+                `<div>
+                     New Mexico CERG
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_afd915fa91c3c1c4ee7dbb2b5ad147dd.setIcon(icon_d507493ddb1b3efada78472851c144c8);
+            
+    
+            var marker_c564a6af05094564aa593edf3fe2274d = L.marker(
+                [44.9537, -93.089],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_41c60694c170a5447c9d971c0dfefcb9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a43b8a71141636b83c03e37257f8e7ab = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3f13bc1bba332b5cdefe9911dc9b7be8 = $(`<div id="html_3f13bc1bba332b5cdefe9911dc9b7be8" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Minnesota CIFA</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Equity-focused climate finance<br>        <b>Address:</b> 85 7th Place East, Suite 280, St. Paul, MN 55101<br>        <b>Contact:</b> <a href=\"https://mn.gov/deed/business/financing-business/cifa.jsp\" target=\"_blank\">https://mn.gov/deed/business/financing-business/cifa.jsp</a>    </div></div>`)[0];
+                popup_a43b8a71141636b83c03e37257f8e7ab.setContent(html_3f13bc1bba332b5cdefe9911dc9b7be8);
+            
+        
+
+        marker_c564a6af05094564aa593edf3fe2274d.bindPopup(popup_a43b8a71141636b83c03e37257f8e7ab)
+        ;
+
+        
+    
+    
+            marker_c564a6af05094564aa593edf3fe2274d.bindTooltip(
+                `<div>
+                     Minnesota CIFA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c564a6af05094564aa593edf3fe2274d.setIcon(icon_41c60694c170a5447c9d971c0dfefcb9);
+            
+    
+            var marker_cd97f3eb24e55dcb1d7df6fac3d28607 = L.marker(
+                [35.7721, -78.6386],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_b3eea8e193b25ffda86ea332b38f743b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_33f0820523244dbfa032c722e34d1205 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_27188c2927ba69260ec6b9bd13c89866 = $(`<div id="html_27188c2927ba69260ec6b9bd13c89866" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>North Carolina Clean Energy Fund</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> Small business & residential solar<br>        <b>Address:</b> 2337 Garner Rd Ste 205, Raleigh, NC 27610<br>        <b>Contact:</b> <a href=\"https://www.nccleanenergyfund.org\" target=\"_blank\">https://www.nccleanenergyfund.org</a>    </div></div>`)[0];
+                popup_33f0820523244dbfa032c722e34d1205.setContent(html_27188c2927ba69260ec6b9bd13c89866);
+            
+        
+
+        marker_cd97f3eb24e55dcb1d7df6fac3d28607.bindPopup(popup_33f0820523244dbfa032c722e34d1205)
+        ;
+
+        
+    
+    
+            marker_cd97f3eb24e55dcb1d7df6fac3d28607.bindTooltip(
+                `<div>
+                     North Carolina Clean Energy Fund
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cd97f3eb24e55dcb1d7df6fac3d28607.setIcon(icon_b3eea8e193b25ffda86ea332b38f743b);
+            
+    
+            var marker_b81466887bdfb8599647edf18f34ee6a = L.marker(
+                [27.2983, -80.35],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_2c635be3c5c00f1ec979f626f916f975 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_266138d55e7e789179abfd9a2980556f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ca0817ac6ac316cce069b354d8d7c244 = $(`<div id="html_ca0817ac6ac316cce069b354d8d7c244" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Solar Energy Loan Fund (SELF)</strong><br>        <b>Type:</b> Nonprofit<br>        <b>Focus:</b> Low-income solar, climate resilience<br>        <b>Address:</b> 531 NW Lake Whitney Pl, Ste 105, Port St. Lucie, FL 34986<br>        <b>Contact:</b> <a href=\"https://solarenergyloanfund.org\" target=\"_blank\">https://solarenergyloanfund.org</a>    </div></div>`)[0];
+                popup_266138d55e7e789179abfd9a2980556f.setContent(html_ca0817ac6ac316cce069b354d8d7c244);
+            
+        
+
+        marker_b81466887bdfb8599647edf18f34ee6a.bindPopup(popup_266138d55e7e789179abfd9a2980556f)
+        ;
+
+        
+    
+    
+            marker_b81466887bdfb8599647edf18f34ee6a.bindTooltip(
+                `<div>
+                     Solar Energy Loan Fund (SELF)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b81466887bdfb8599647edf18f34ee6a.setIcon(icon_2c635be3c5c00f1ec979f626f916f975);
+            
+    
+            var marker_f3d4f5c4f60dc66bd90eeb4609eebe7a = L.marker(
+                [43.3033, -91.7857],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_a19c8875b58dd1e522805fa9e57cfc70 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_891a4e738df18409313b514c1b3f1944 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1913cb1a9a59f5cffa805a36006adf6f = $(`<div id="html_1913cb1a9a59f5cffa805a36006adf6f" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Winneshiek Energy District</strong><br>        <b>Type:</b> Local<br>        <b>Focus:</b> Rural electrification & ag efficiency<br>        <b>Address:</b> 217 W Water St, Decorah, IA 52101<br>        <b>Contact:</b> <a href=\"https://energydistrict.org\" target=\"_blank\">https://energydistrict.org</a>    </div></div>`)[0];
+                popup_891a4e738df18409313b514c1b3f1944.setContent(html_1913cb1a9a59f5cffa805a36006adf6f);
+            
+        
+
+        marker_f3d4f5c4f60dc66bd90eeb4609eebe7a.bindPopup(popup_891a4e738df18409313b514c1b3f1944)
+        ;
+
+        
+    
+    
+            marker_f3d4f5c4f60dc66bd90eeb4609eebe7a.bindTooltip(
+                `<div>
+                     Winneshiek Energy District
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f3d4f5c4f60dc66bd90eeb4609eebe7a.setIcon(icon_a19c8875b58dd1e522805fa9e57cfc70);
+            
+    
+            var marker_3abb9b1f6608c469190f16274c39cad0 = L.marker(
+                [41.7606, -72.673],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_6f62091009ef8f7d744448f1f4002fd3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c52ada1740fdd76574af51487394d03e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_942faf663359940030ba3fc91d0cbe0f = $(`<div id="html_942faf663359940030ba3fc91d0cbe0f" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Inclusive Prosperity Capital</strong><br>        <b>Type:</b> Nonprofit<br>        <b>Focus:</b> Community solar, affordable housing<br>        <b>Address:</b> 75 Charter Oak Ave, Suite 1-130, Hartford, CT 06106<br>        <b>Contact:</b> <a href=\"https://www.inclusiveprosperitycapital.org\" target=\"_blank\">https://www.inclusiveprosperitycapital.org</a>    </div></div>`)[0];
+                popup_c52ada1740fdd76574af51487394d03e.setContent(html_942faf663359940030ba3fc91d0cbe0f);
+            
+        
+
+        marker_3abb9b1f6608c469190f16274c39cad0.bindPopup(popup_c52ada1740fdd76574af51487394d03e)
+        ;
+
+        
+    
+    
+            marker_3abb9b1f6608c469190f16274c39cad0.bindTooltip(
+                `<div>
+                     Inclusive Prosperity Capital
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3abb9b1f6608c469190f16274c39cad0.setIcon(icon_6f62091009ef8f7d744448f1f4002fd3);
+            
+    
+            var marker_95c68daef2e6cd32d61825387b6d62ac = L.marker(
+                [30.2711, -97.7437],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_4fe1393aef5aed91437881d61e673e7f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cce03cc0b198aa725e49f61326235371 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b0d9b8182b36127b614443fd3629b89b = $(`<div id="html_b0d9b8182b36127b614443fd3629b89b" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>Green Bank Texas</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> IRA-funded clean infrastructure<br>        <b>Address:</b> 816 Congress Ave, Ste 970, Austin, TX 78701<br>        <b>Contact:</b> <a href=\"https://www.greenbanktexas.org\" target=\"_blank\">https://www.greenbanktexas.org</a>    </div></div>`)[0];
+                popup_cce03cc0b198aa725e49f61326235371.setContent(html_b0d9b8182b36127b614443fd3629b89b);
+            
+        
+
+        marker_95c68daef2e6cd32d61825387b6d62ac.bindPopup(popup_cce03cc0b198aa725e49f61326235371)
+        ;
+
+        
+    
+    
+            marker_95c68daef2e6cd32d61825387b6d62ac.bindTooltip(
+                `<div>
+                     Green Bank Texas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_95c68daef2e6cd32d61825387b6d62ac.setIcon(icon_4fe1393aef5aed91437881d61e673e7f);
+            
+    
+            var marker_d1d8db9e815c2e6c6d9a99b163e84b4a = L.marker(
+                [40.2206, -74.7697],
+                {
+}
+            ).addTo(marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b);
+        
+    
+            var icon_537c7516511e6cd58647f9023b1a2a8e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2cf53a37c12878fd69bf9da734f8ab99 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_db4941b2ddf874c8ea961dbc5714ed90 = $(`<div id="html_db4941b2ddf874c8ea961dbc5714ed90" style="width: 100.0%; height: 100.0%;"><div style=\"width: 300px;\">        <strong>New Jersey Green Fund (proposed)</strong><br>        <b>Type:</b> State<br>        <b>Focus:</b> TBD – clean energy + equity<br>        <b>Address:</b> 36 W State St, Trenton, NJ 08608<br>        <b>Contact:</b> <a href=\"https://www.njeda.gov (parent agency for now)\" target=\"_blank\">https://www.njeda.gov (parent agency for now)</a>    </div></div>`)[0];
+                popup_2cf53a37c12878fd69bf9da734f8ab99.setContent(html_db4941b2ddf874c8ea961dbc5714ed90);
+            
+        
+
+        marker_d1d8db9e815c2e6c6d9a99b163e84b4a.bindPopup(popup_2cf53a37c12878fd69bf9da734f8ab99)
+        ;
+
+        
+    
+    
+            marker_d1d8db9e815c2e6c6d9a99b163e84b4a.bindTooltip(
+                `<div>
+                     New Jersey Green Fund (proposed)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d1d8db9e815c2e6c6d9a99b163e84b4a.setIcon(icon_537c7516511e6cd58647f9023b1a2a8e);
+            
+    
+            marker_cluster_b645f1bdb9784d4bbd3d82aafea9900b.addTo(map_2102323809e121d9b8738fdd82980c84);
+        
+</script>
+</html>
